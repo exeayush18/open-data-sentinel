@@ -1,0 +1,30 @@
+database_url: sqlite:///./sentinel.db
+sources:
+  - name: city-service-requests
+    kind: socrata
+    # Replace this URL with a public Socrata resource endpoint for a real run.
+    url: https://data.cityofnewyork.us/resource/erm2-nwe9.json
+    primary_key: unique_key
+    max_records: 100
+    min_records: 50
+    max_null_rate: 0.85
+    stale_after_hours: 30
+
+  - name: uk-national-data-library-catalog
+    kind: ckan
+    # Catalog metadata only. package_search avoids downloading data files.
+    url: https://data.gov.uk/api/action/package_search?rows=25
+    primary_key: id
+    max_records: 25
+    min_records: 10
+    stale_after_hours: 168
+
+  - name: usgs-water-observations
+    kind: json
+    # USGS Instantaneous Values API. The nested list is normalized into records.
+    url: https://waterservices.usgs.gov/nwis/iv/?format=json&sites=01646500&parameterCd=00060&siteStatus=all
+    data_path: value.timeSeries
+    primary_key: sourceInfo.siteCode
+    max_records: 10
+    min_records: 1
+    stale_after_hours: 12

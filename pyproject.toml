@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "open-data-sentinel"
+version = "0.1.0"
+description = "A lightweight observability pipeline for public data sources."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Ayush Singh" }]
+dependencies = [
+  "beautifulsoup4>=4.12",
+  "fastapi>=0.115",
+  "httpx>=0.27",
+  "PyYAML>=6.0",
+  "SQLAlchemy>=2.0",
+  "uvicorn[standard]>=0.30",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.8"]
+postgres = ["psycopg[binary]>=3.2"]
+
+[project.scripts]
+ods = "open_data_sentinel.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/open_data_sentinel"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

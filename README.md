@@ -103,7 +103,8 @@ Supported `kind` values:
 
 Nested JSON fields, such as `sourceInfo.siteCode`, can be used as primary keys.
 
-The check thresholds are deliberately visible and simple for version 1. Version 2 will make them source-specific and add scheduled runs, freshness policy enforcement, alert webhooks, and a dashboard.
+The check thresholds are deliberately visible and source-specific. Future work can add scheduled runs,
+alert webhooks, and a dashboard.
 
 ## Test
 
